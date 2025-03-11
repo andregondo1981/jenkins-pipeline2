@@ -18,11 +18,13 @@ steps {
 stage ('dockerImageBuild'){
     steps{
         sh 'docker build -t jenkins-ci .'
+        sh 'docker build -t imageversion .'
     }
 }
 stage ('dockerImageTag'){
     steps {
         sh'docker tag jenkins-ci:latest 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
+        sh'docker tag jenkins-ci:latest 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:v1.$BUILD_NUMBER'
     }
 }
 
@@ -30,6 +32,7 @@ stage ('dockerImageTag'){
 stage ('pushImage'){
     steps {
         sh 'docker push 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
+        sh 'docker push 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:v1.$BUILD_NUMBER'
     }
 }
 }
