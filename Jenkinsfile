@@ -22,7 +22,7 @@ stage ('dockerImageBuild'){
 }
 stage ('dockerImageTag'){
     steps {
-        docker tag jenkins-ci:latest 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest
+        sh'docker tag jenkins-ci:latest 463470937559.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
     }
 }
 
@@ -33,8 +33,4 @@ stage ('pushImage'){
     }
 }
 }
-
-
-
-
 }
